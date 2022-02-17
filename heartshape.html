@@ -1,0 +1,56 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>ArcGIS API for JavaScript Tutorials: Display a map</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+   
+    <link rel="stylesheet" href="https://js.arcgis.com/4.22/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.22/"></script>
+ 
+    <script>
+       require(["esri/config","esri/Map", "esri/views/MapView",   "esri/widgets/BasemapToggle",
+      "esri/widgets/BasemapGallery"], function(esriConfig, Map, MapView, BasemapToggle, BasemapGallery) {
+        esriConfig.apiKey = "AAPK1f06b964f03842c7bb290d3d7b743203_nnBQnDFmZKFuh2xjPQ93BCMoybvrcO6soUQT-NkKM-dcDSjp8rGe7z8vuMEirQc";
+
+        const map = new Map({
+          basemap: "arcgis-terrain" // Basemap layer service
+        });
+     
+         const view = new MapView({
+          map: map,
+          center: [177.2020, -17.8577], // Longitude, latitude, Tacarua island is a heart shaped island
+          zoom: 17, // Zoom level
+          container: "viewDiv" // Div element
+        });
+         const basemapToggle = new BasemapToggle({
+         view: view,
+         nextBasemap: "arcgis-imagery"
+        });
+         view.ui.add(basemapToggle,"bottom-right");
+          const basemapGallery = new BasemapGallery({
+        view: view,
+        source: {
+          query: {
+            title: '"World Basemaps for Developers" AND owner:esri'
+          }
+        }
+      });
+
+ });
+    </script>
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
